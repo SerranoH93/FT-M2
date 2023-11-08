@@ -1,10 +1,12 @@
 // Crear un array vacío llamado 'toDoItems'
 // Tu codigo acá:
-
+//! No olvidar crear este array 
+var toDoItems = []
 // En la página 'index.html' hay un elemento span cuyo texto es 'Aplicación creada por:'.
 // Usando querySelector seleccionar dicho span por su id ('createdBy') y luego usando innerHTML
 // agregar tu nombre al final del texto actual. Ej: 'Aplicación creada por Franco'
 // Tu código acá:
+
 
 // Crear una clase denominada 'ToDo' cuyo constructor debe recibir un único parámetro del tipo string
 // con el nombre 'description' que será justamente la descripción del ToDo.
@@ -13,8 +15,10 @@
 // 2) 'complete'    : debe setearse en false
 // Ayuda: usar 'this' en el constructor
 
+//? CLASES CONSTRUCTORAS -> { this }
 function ToDo(description) {
   // Tu código acá:
+  this.complete = false
 }
 
 // Agregar un método denominado 'completeToDo' al prototipo de la clase ToDo
@@ -22,6 +26,9 @@ function ToDo(description) {
 // Debe setear el atributo 'complete' del ToDo en true
 
 // Tu código acá:
+ToDo.prototype.completeToDo = function(){
+  this.complete = true
+}
 
 // Agregar dos parámetros a la función 'buildToDo':
 //    1) Un objeto de la clase ToDo
@@ -118,7 +125,8 @@ function completeToDo(event) {
 */
 // ********************************************** ----------- ********************************************** //
 
-// Acá debes insertar la llamada a 'displayToDos'
+//! Acá debes insertar la llamada a 'displayToDos'
+
 
 // ---------------------------- NO CAMBIES NADA DE ACÁ PARA ABAJO ----------------------------- //
 if (typeof module !== "undefined") {
