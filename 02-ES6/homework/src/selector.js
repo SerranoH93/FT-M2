@@ -5,14 +5,11 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
     startEl = document.body;
   }
   if(matchFunc(startEl)) resultSet.push(startEl);
-
-
   // recorre el árbol del DOM y recolecta elementos que matchien en resultSet
   // usa matchFunc para identificar elementos que matchien
   for(const child of startEl.children){
     resultSet.push(...traverseDomAndCollectElements(matchFunc, child));
-  }
-  
+  }  
   return resultSet;
 };
 
@@ -22,13 +19,10 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
 var selectorTypeMatcher = function (selector) {
   // tu código aquí
   if(selector[0] === '#') return "id";
-
   if(selector[0] === '.') return  "class";
-
-  for (let i = 1; selector.length; i++)  {
+  for (let i = 1; i < selector.length; i++) {
     if(selector[i] === ".") return "tag.class";  
   }
-
   return "tag";
   
 };
@@ -46,23 +40,20 @@ var matchFunctionMaker = function (selector) {
     matchFunction = (element) => `#${element.id}` === selector; //retorna un true || false
   } else if (selectorType === "class") {
     matchFunction = (element) => {
-      for (let i = 0; element.classList.length; i++)  {
-        if(`.${element.id}` === selector) return true;
+      for (let i = 0; i < element.classList.length; i++)  {
+        if(`.${element.classList[i]}` === selector) return true;
       }
       return false;
-    }
-
+    };
   } else if (selectorType === "tag.class") {
     matchFunction = (element) => {
       let [tag, clase] = selector.split(".");
       let funcClass = matchFunctionMaker(`.${clase}`);
       let funcTag = matchFunctionMaker(tag);
-      return funcTag(element) && funcClass(element)
-    }
-
+      return funcClass(element) && funcTag(element)
+    };
   } else if (selectorType === "tag") {
     matchFunction = (element) => element.tagName === selector.toUpperCase();
-
   }
   return matchFunction;
 };
